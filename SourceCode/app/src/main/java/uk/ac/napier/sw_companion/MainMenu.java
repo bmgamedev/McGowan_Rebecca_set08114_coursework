@@ -30,6 +30,7 @@ public class MainMenu extends AppCompatActivity {
         Button btnAdd = (Button) findViewById(R.id.btnAddLog);
         Button btnView = (Button) findViewById(R.id.btnViewLog);
         Button btnWeight = (Button) findViewById(R.id.btnWeightTracker);
+        Button btnWebsite = (Button) findViewById(R.id.btnWebsite);
         final EditText logDate = (EditText) findViewById(R.id.txtLogDate);
 
         long date = System.currentTimeMillis();
@@ -132,25 +133,19 @@ public class MainMenu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnWebsite.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick (View view){
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    intent.setData(Uri.parse("https://www.slimmingworld.co.uk/"));
+                    startActivity(intent);
+            }
+        });
+
     }
 
-    //TODO delete if not finished - don't forget to delete the button too
-    public void sendNotification(View view) {
-
-        //https://www.androidauthority.com/how-to-create-android-notifications-707254/
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
-
-        Intent intent = new Intent(this, MainMenu.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-        mBuilder.setContentIntent(pendingIntent);
-        mBuilder.setSmallIcon(R.drawable.reusable_border);
-        mBuilder.setContentTitle("Food Log Reminder");
-        mBuilder.setContentText("Don't forget to add today's food log!");
-        mBuilder.setAutoCancel(true);
-
-        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(001, mBuilder.build());
-    }
 }

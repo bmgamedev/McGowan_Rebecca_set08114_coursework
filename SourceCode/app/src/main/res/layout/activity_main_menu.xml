@@ -4,37 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uk.ac.napier.sw_companion.MainMenu">
+    tools:context="uk.ac.napier.sw_companion.MainMenu"
+    tools:layout_editor_absoluteY="81dp">
 
     <Button
         android:id="@+id/btnAddLog"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="113dp"
-        android:text="Add Daily Log"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:text="Add New Daily Food Log"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnViewLog"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="27dp"
-        android:text="View Daily Log"
+        android:layout_marginEnd="16dp"
+        android:text="View Existing Log"
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtLogDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtLogDate"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/txtLogDate" />
 
     <EditText
         android:id="@+id/txtLogDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="14dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="137dp"
         android:ems="10"
+        android:hint="Date"
         android:inputType="date"
         app:layout_constraintEnd_toStartOf="@+id/btnViewLog"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,22 +45,26 @@
 
     <Button
         android:id="@+id/btnWeightTracker"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="133dp"
-        android:layout_marginEnd="9dp"
-        android:text="Weight Tracker"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="44dp"
+        android:text="Open Weight Tracker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnViewLog" />
 
     <Button
-        android:id="@+id/btnTest"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnWebsite"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="27dp"
-        android:layout_marginStart="16dp"
-        android:text="Button"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:text="Visit Official Site"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="sendNotification"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
