@@ -55,27 +55,17 @@ public class WeightTracker extends AppCompatActivity {
         weightTracker.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(WeightTracker.this, "click is working", Toast.LENGTH_LONG).show();
                 WeightEntry weightEntry = null;
                 try{
-                    //int pos = (int) parent.getAdapter().getItem(position);
-                    //weightEntry = weightFile.weightList.get(position);
-
-                    try {
-                        Intent intent = new Intent(WeightTracker.this, AmendWeight.class);
-                        //intent.putExtra("WeightEntry", weightEntry);
-                        intent.putExtra("posInt", position);
-                        intent.putExtra("WeightFile", weightFile);
-                        startActivity(intent);
-                    }
-                    catch (Exception e){
-                        Toast.makeText(WeightTracker.this, "error opening new activity", Toast.LENGTH_LONG).show();
-                    }
+                    Intent intent = new Intent(WeightTracker.this, AmendWeight.class);
+                    intent.putExtra("posInt", position);
+                    intent.putExtra("WeightFile", weightFile);
+                    startActivity(intent);
                 }
                 catch (Exception e){
-                    Toast.makeText(WeightTracker.this, "error getting the weight entry", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    Toast.makeText(WeightTracker.this, "Error opening weight entry", Toast.LENGTH_LONG).show();
                 }
-
                 finish();
             }
         });

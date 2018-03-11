@@ -88,8 +88,6 @@ public class AddWeight extends AppCompatActivity {
                     Toast.makeText(AddWeight.this, "Issue ordering the list", Toast.LENGTH_SHORT).show();
                 }
 
-
-
                 try{
                     File file = getBaseContext().getFileStreamPath("WeightLogFile.txt");
 
@@ -109,9 +107,7 @@ public class AddWeight extends AppCompatActivity {
                 startActivity(intent);
 
                 finish();
-
             }
         });
-
     }
 }

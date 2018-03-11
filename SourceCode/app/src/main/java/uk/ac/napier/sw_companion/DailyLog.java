@@ -13,9 +13,6 @@ public class DailyLog implements Serializable {
 
     //properties
     public Date date;
-    //public Boolean hexa; //TODO delete?
-    //public Boolean hexb; //TODO delete?
-    //public int syns; //TODO delete this? - just show the total syns using the objects in the list?
     public List<Food> food  = new ArrayList<Food>();
 
     //constructors

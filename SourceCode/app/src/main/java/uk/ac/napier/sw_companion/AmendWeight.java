@@ -95,8 +95,6 @@ public class AmendWeight extends AppCompatActivity {
                     Toast.makeText(AmendWeight.this, "Issue ordering the list", Toast.LENGTH_SHORT).show();
                 }
 
-
-
                 try{
                     File file = getBaseContext().getFileStreamPath("WeightLogFile.txt");
 
@@ -147,6 +145,5 @@ public class AmendWeight extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

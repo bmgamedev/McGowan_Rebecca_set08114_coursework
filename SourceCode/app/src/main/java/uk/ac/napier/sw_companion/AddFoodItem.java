@@ -46,20 +46,20 @@ public class AddFoodItem extends AppCompatActivity {
             public void onClick (View view){
                 Food foodItem = new Food();
                 try{
-                    //(String name, Boolean isFree, int syns, String amount)
                     foodItem.name = name.getText().toString();
                     foodItem.isFree =  isFree.isChecked();
                     foodItem.hexa =  hexA.isChecked();
                     foodItem.hexb =  hexB.isChecked();
                     foodItem.syns =  Double.parseDouble(syns.getText().toString());
                     foodItem.amount =  amount.getText().toString();
-                    todayLog.food.add(foodItem); //TODO get working
+                    todayLog.food.add(foodItem);
                 }
                 catch (Exception e){
-                    Toast.makeText(AddFoodItem.this, e.toString(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    Toast.makeText(AddFoodItem.this, "Error creating entry for food item. Please try again.", Toast.LENGTH_LONG).show();
                 }
 
-                Toast.makeText(AddFoodItem.this, "food item stored", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddFoodItem.this, "Food item stored", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(AddFoodItem.this, ViewFoodLog.class);
                 intent.putExtra("DailyLog", todayLog);

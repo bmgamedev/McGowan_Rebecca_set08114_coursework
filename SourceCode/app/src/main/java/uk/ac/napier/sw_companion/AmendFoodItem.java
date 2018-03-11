@@ -54,7 +54,8 @@ public class AmendFoodItem extends AppCompatActivity {
 
         }
         catch (Exception e){
-            Toast.makeText(AmendFoodItem.this, e.toString(), Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            Toast.makeText(AmendFoodItem.this, "Error creating entry for food item. Please try again.", Toast.LENGTH_LONG).show();
         }
 
         SimpleDateFormat fileFormat = new SimpleDateFormat("yyyyMMdd");
@@ -68,15 +69,13 @@ public class AmendFoodItem extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        //TODO amend
+        //Amend the food item
         final String finalFilename1 = filename;
         btnAmend.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick (View view){
-                //Food foodItem = new Food();
                 try{
-                    //(String name, Boolean isFree, int syns, String amount)
                     foodItem.name = name.getText().toString();
                     foodItem.isFree =  isFree.isChecked();
                     foodItem.hexa =  hexA.isChecked();
@@ -85,10 +84,11 @@ public class AmendFoodItem extends AppCompatActivity {
                     foodItem.amount =  amount.getText().toString();
                 }
                 catch (Exception e){
-                    Toast.makeText(AmendFoodItem.this, e.toString(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    //Toast.makeText(AmendFoodItem.this, e.toString(), Toast.LENGTH_LONG).show();
                 }
 
-                Toast.makeText(AmendFoodItem.this, "food item stored", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AmendFoodItem.this, "food item stored", Toast.LENGTH_SHORT).show();
 
                 try{
                     File file = getBaseContext().getFileStreamPath(finalFilename1);
@@ -111,7 +111,7 @@ public class AmendFoodItem extends AppCompatActivity {
             }
         });
 
-        //TODO Delete
+        //Delete the food item
         final String finalFilename = filename;
         btnDelete.setOnClickListener(new View.OnClickListener() {
 
@@ -139,6 +139,5 @@ public class AmendFoodItem extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }

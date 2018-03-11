@@ -21,10 +21,7 @@ import java.util.Date;
 
 public class ViewFoodLog extends AppCompatActivity {
 
-
-
     DailyLog todayLog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +31,8 @@ public class ViewFoodLog extends AppCompatActivity {
 
         todayLog = (DailyLog) getIntent().getSerializableExtra("DailyLog");
 
-        final TextView curDate = (TextView) findViewById(R.id.txtDate); //TODO change to be non-editable by users in the VIEW screen
-        //final EditText syns = (EditText) findViewById(R.id.txtSyns);
-        ListView foodItems = (ListView) findViewById(R.id.lstFoodItems); //set listview box to the daily log's .getFoodItems() contents
+        final TextView curDate = (TextView) findViewById(R.id.txtDate);
+        ListView foodItems = (ListView) findViewById(R.id.lstFoodItems);
         final Button btnAddFood = (Button) findViewById(R.id.btnAddFood);
         TextView synsLabel = (TextView) findViewById(R.id.txtSynsLabel);
 
@@ -64,8 +60,6 @@ public class ViewFoodLog extends AppCompatActivity {
             String formattedDate = viewFormat.format(date);
 
             curDate.setText(formattedDate);
-
-            //syns.setText("0");
         }
         else {
             Date date = todayLog.date;
@@ -74,13 +68,10 @@ public class ViewFoodLog extends AppCompatActivity {
 
             curDate.setText(formattedDate);
 
-            //syns.setText(Integer.toString(todayLog.syns));
-
             Double synTotal = 0.0;
             for (Food foodItem : todayLog.food){
                 synTotal = synTotal + foodItem.syns;
             }
-            //syns.setText(String.valueOf(synTotal));
             synsLabel.setText("Daily total: " + String.valueOf(synTotal) + " syns");
         }
 
@@ -89,16 +80,15 @@ public class ViewFoodLog extends AppCompatActivity {
         foodItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(ViewFoodLog.this, "click is working", Toast.LENGTH_LONG).show();
                 try{
                     Intent intent = new Intent(ViewFoodLog.this, AmendFoodItem.class);
-                    //intent.putExtra("WeightEntry", weightEntry);
                     intent.putExtra("posInt", position);
                     intent.putExtra("DailyLog", todayLog);
                     startActivity(intent);
                 }
                 catch (Exception e){
-                    Toast.makeText(ViewFoodLog.this, "error getting the food item entry", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    Toast.makeText(ViewFoodLog.this, "Error getting the food item entry", Toast.LENGTH_LONG).show();
                 }
                 finish();
             }
@@ -121,18 +111,9 @@ public class ViewFoodLog extends AppCompatActivity {
                     //Toast.makeText(ViewFoodLog.this, " Parsing worked: " + filename, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    //Toast.makeText(ViewFoodLog.this, e.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ViewFoodLog.this, "Error creating filename. Ensure date is in dd/MM/yyyy format.", Toast.LENGTH_LONG).show();
                 }
 
-
-                //update the food log object
-                /*try{
-                    //todayLog.syns = Integer.parseInt(syns.getText().toString());
-                    //Toast.makeText(AddFoodLog.this, "Object created", Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e){
-                    Toast.makeText(ViewFoodLog.this, e.toString(), Toast.LENGTH_LONG).show();
-                }*/
 
                 try {
                     File file = getBaseContext().getFileStreamPath(filename);
@@ -145,8 +126,7 @@ public class ViewFoodLog extends AppCompatActivity {
                 }
                 catch (Exception e){
                     e.printStackTrace();
-                    Toast.makeText(ViewFoodLog.this, filename + " not saved", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(ViewFoodLog.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewFoodLog.this, "File not saved: no data to save", Toast.LENGTH_SHORT).show();
                 }
 
                 Intent intent = new Intent(ViewFoodLog.this, MainMenu.class);
@@ -159,19 +139,16 @@ public class ViewFoodLog extends AppCompatActivity {
         btnAddFood.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick (View view){
-                //Toast.makeText(ViewFoodLog.this, "Add some food...", Toast.LENGTH_SHORT).show();
                 Date logDate;
                 try{
                     logDate = dateFormat.parse(curDate.getText().toString());
-
                     todayLog.date = logDate;
-                    //todayLog.syns = Integer.parseInt(syns.getText().toString());
                 }
                 catch (Exception e){
-                    Toast.makeText(ViewFoodLog.this, e.toString(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                    Toast.makeText(ViewFoodLog.this, "Error creating log file. Ensure date is in dd/MM/yyyy format.", Toast.LENGTH_LONG).show();
                 }
 
-                //Toast.makeText(AddFoodLog.this, "Add some food...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ViewFoodLog.this, AddFoodItem.class);
                 intent.putExtra("DailyLog", todayLog);
                 startActivity(intent);
@@ -180,7 +157,5 @@ public class ViewFoodLog extends AppCompatActivity {
 
             }
         });
-
-
     }
 }

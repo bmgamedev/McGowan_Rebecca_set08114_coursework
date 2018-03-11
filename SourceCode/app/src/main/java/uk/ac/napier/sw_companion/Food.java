@@ -11,24 +11,16 @@ import java.text.DecimalFormat;
 public class Food implements Serializable{
 
     //properties
-    //TODO - make private?
     public String name;
     public Boolean isFree;
-    public Boolean hexa; //TODO add to UI
-    public Boolean hexb; //TODO add to UI
-    public double syns; //TODO change to double (gonna need to update casts etc in the rest of the code
-    public String amount; //TODO int for quantity, string for unit of measurement
-    //private String type; //breakfast/lunch/dinner/other
+    public Boolean hexa;
+    public Boolean hexb;
+    public double syns;
+    public String amount;
 
     //constructor
     public Food() {}
 
-    /*public Food(String name, Boolean isFree, int syns, String amount) {
-        this.name = name;
-        this.isFree = isFree;
-        this.syns = syns;
-        this.amount = amount;
-    }*/
 
     @Override
     public String toString(){

@@ -43,11 +43,11 @@ public class MainMenu extends AppCompatActivity {
 
             @Override
             public void onClick (View view){
-                DailyLog todayLog = new DailyLog();
+            DailyLog todayLog = new DailyLog();
 
-                Intent intent = new Intent(MainMenu.this, ViewFoodLog.class);
-                intent.putExtra("DailyLog", todayLog);
-                startActivity(intent);
+            Intent intent = new Intent(MainMenu.this, ViewFoodLog.class);
+            intent.putExtra("DailyLog", todayLog);
+            startActivity(intent);
 
             }
         });
@@ -56,48 +56,44 @@ public class MainMenu extends AppCompatActivity {
 
             @Override
             public void onClick (View view){
-                String fileDate = "";
+            String fileDate = "";
 
-                try {
-                    SimpleDateFormat fileFormat = new SimpleDateFormat("yyyyMMdd");
-                    Date date = dateFormat.parse(logDate.getText().toString());
-                    fileDate = fileFormat.format(date);
+            try {
+                SimpleDateFormat fileFormat = new SimpleDateFormat("yyyyMMdd");
+                Date date = dateFormat.parse(logDate.getText().toString());
+                fileDate = fileFormat.format(date);
 
+            }
+            catch (Exception e){
+                Toast.makeText(MainMenu.this, "Date is in the wrong format. Try again with dd/MM/yyyy", Toast.LENGTH_LONG).show();
+            }
+
+            String filename = fileDate + "_DailyLog.txt";
+            File file = getBaseContext().getFileStreamPath(filename);
+
+            if(file.exists()){
+                //since file exists, read the data into a food log object
+                DailyLog todayLog = null;
+
+                try{
+                    FileInputStream fileIn = new FileInputStream(file);
+                    ObjectInputStream objIn = new ObjectInputStream(fileIn);
+
+                    todayLog = (DailyLog) objIn.readObject();
+
+                    objIn.close();
                 }
                 catch (Exception e){
-                    Toast.makeText(MainMenu.this, "Date seems to be in the wrong format. Try again with dd/MM/yyyy", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainMenu.this, e.toString(), Toast.LENGTH_LONG).show();
                 }
 
-                String filename = fileDate + "_DailyLog.txt";
-                File file = getBaseContext().getFileStreamPath(filename);
-
-                if(file.exists()){
-                    //since file exists, read the data into a food log object
-                    DailyLog todayLog = null;
-
-                    try{
-                        FileInputStream fileIn = new FileInputStream(file);
-                        ObjectInputStream objIn = new ObjectInputStream(fileIn);
-
-                        todayLog = (DailyLog) objIn.readObject();
-
-                        objIn.close();
-
-                        //Toast.makeText(MainMenu.this, "object created", Toast.LENGTH_SHORT).show();
-                    }
-                    catch (Exception e){
-                        Toast.makeText(MainMenu.this, e.toString(), Toast.LENGTH_LONG).show();
-                    }
-
-                    Intent intent = new Intent(MainMenu.this, ViewFoodLog.class);
-                    intent.putExtra("DailyLog", todayLog);
-                    startActivity(intent);
-                    //Toast.makeText(MainMenu.this, "opening " + filename, Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                    Toast.makeText(MainMenu.this, "Sorry, no file found for " + filename, Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(MainMenu.this, ViewFoodLog.class);
+                intent.putExtra("DailyLog", todayLog);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(MainMenu.this, "Sorry, no file found for " + filename, Toast.LENGTH_SHORT).show();
+            }
 
             }
         });
@@ -121,7 +117,8 @@ public class MainMenu extends AppCompatActivity {
                         objIn.close();
                     }
                     catch (Exception e){
-                        Toast.makeText(MainMenu.this, e.toString(), Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                        Toast.makeText(MainMenu.this, "Error retrieving weight data", Toast.LENGTH_LONG).show();
                     }
                 }
                 else {
